@@ -1,30 +1,28 @@
-# hubot-hubot-wit
+# hubot-wit
 
-A hubot script that does the things
-
-See [`src/hubot-wit.coffee`](src/hubot-wit.coffee) for full documentation.
+A script to use Wit.ai with Hubot.
 
 ## Installation
 
 In hubot project repo, run:
 
-`npm install hubot-hubot-wit --save`
+`npm install hubot-wit --save`
 
-Then add **hubot-hubot-wit** to your `external-scripts.json`:
+Then add **hubot-wit** to your `external-scripts.json`:
 
 ```json
 [
-  "hubot-hubot-wit"
+  "hubot-wit"
 ]
 ```
 
 ## Sample Interaction
 
 ```
-user1>> hubot hello
-hubot>> hello!
+user1>> hubot hi
+hubot>> hi!
 ```
 
 ## NPM Module
 
-https://www.npmjs.com/package/hubot-hubot-wit
+https://www.npmjs.com/package/hubot-wit

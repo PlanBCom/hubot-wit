@@ -1,6 +1,6 @@
 {
   "name": "hubot-wit",
-  "description": "A hubot script that does the things",
+  "description": "A script to use Wit.ai with Hubot.",
   "version": "0.0.1",
   "author": "Plan B",
   "license": "MIT",
@@ -9,11 +9,11 @@
 
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-hubot-wit.git"
+    "url": "git@github.com:PlanBCom/hubot-wit.git"
   },
 
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-hubot-wit/issues"
+    "url": "https://github.com/PlanBCom/hubot-wit/issues"
   },
 
   "dependencies": {
