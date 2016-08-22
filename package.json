@@ -1,7 +1,7 @@
 {
-  "name": "hubot-hubot-wit",
+  "name": "hubot-wit",
   "description": "A hubot script that does the things",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Plan B",
   "license": "MIT",
 
