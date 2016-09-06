@@ -1,7 +1,7 @@
 {
   "name": "hubot-wit",
   "description": "A script to use Wit.ai with Hubot.",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Plan B",
   "license": "MIT",
   "keywords": "hubot, hubot-wit, wit, ai",
