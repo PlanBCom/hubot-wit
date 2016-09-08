@@ -48,14 +48,14 @@ module.exports = function(robot) {
         const { entities } = request;
         const botCommand = firstEntityValue(entities, "command");
 
-        robot.emit(botCommand);
+        robot.emit(botCommand, res);
 
         return new Promise(function(resolve, reject) {
           return reject();
         });
       }
     };
-    
+
     const client = new Wit({accessToken: WIT_TOKEN, actions});
 
     client.runActions("session-" + res.message.user["id"], query, context)
