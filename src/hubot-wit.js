@@ -30,32 +30,32 @@ module.exports = function(robot) {
     return typeof val === 'object' ? val.value : val;
   };
 
-  const actions = {
-    send(request, response) {
-      const {sessionId, context, entities} = request;
-      const {text, quickreplies} = response;
-
-      return new Promise(function(resolve, reject) {
-        res.reply(text);
-        return resolve();
-      });
-    },
-    missing(request) {
-      const { entities } = request;
-      const botCommand = firstEntityValue(entities, "command");
-
-      robot.emit(botCommand);
-
-      return new Promise(function(resolve, reject) {
-        return reject();
-      });
-    }
-  };
-
   robot.respond(/(.*)/i, function(res) {
     const query = res.match[1];
     let context = {};
 
+    const actions = {
+      send(request, response) {
+        const {sessionId, context, entities} = request;
+        const {text, quickreplies} = response;
+
+        return new Promise(function(resolve, reject) {
+          res.reply(text);
+          return resolve();
+        });
+      },
+      missing(request) {
+        const { entities } = request;
+        const botCommand = firstEntityValue(entities, "command");
+
+        robot.emit(botCommand);
+
+        return new Promise(function(resolve, reject) {
+          return reject();
+        });
+      }
+    };
+    
     const client = new Wit({accessToken: WIT_TOKEN, actions});
 
     client.runActions("session-" + res.message.user["id"], query, context)
