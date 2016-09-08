@@ -32,6 +32,16 @@ module.exports = function(robot) {
           return resolve();
         });
       },
+      missing(request) {
+        const { entities } = request;
+        const botCommand = firstEntityValue(entities, "command");
+
+        robot.emit(botCommand);
+
+        return new Promise(function(resolve, reject) {
+          return reject();
+        });
+      }
     };
 
     const client = new Wit({accessToken: WIT_TOKEN, actions});
