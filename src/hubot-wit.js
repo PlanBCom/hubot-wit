@@ -45,13 +45,14 @@ module.exports = function(robot) {
         });
       },
       missing(request) {
-        const { entities } = request;
+        const { entities, context } = request;
+        console.log(entities);
         const botCommand = firstEntityValue(entities, "command");
 
-        robot.emit(botCommand, res);
-
         return new Promise(function(resolve, reject) {
-          return reject();
+          robot.emit(botCommand, res);
+
+          return resolve();
         });
       }
     };
