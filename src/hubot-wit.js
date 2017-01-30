@@ -81,11 +81,10 @@ module.exports = function(robot) {
 
     const client = new Wit({accessToken: WIT_TOKEN, actions});
 
-    client.runActions(findOrCreateSession(res.message.user["id"]), query, context)
+    client.runActions(sessionId, query, context)
       .then((ctx) => {
         context = ctx;
         // Save Context
-        sessionId = findOrCreateSession(res.message.user["id"]);
         sessions[sessionId].context = ctx;
       })
       .catch(err => console.error(err))
