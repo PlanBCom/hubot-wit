@@ -51,7 +51,8 @@ module.exports = function(robot) {
 
   robot.respond(/(.*)/i, function(res) {
     const query = res.match[1];
-    sessionId = findOrCreateSession(res.message.user["id"]);
+    const sessionId = findOrCreateSession(res.message.user["id"]);
+    let context = {};
     if (sessions[sessionId].context !== {}) {
       context = sessions[sessionId].context;
     }
