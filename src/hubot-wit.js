@@ -15,6 +15,7 @@
 
 const {Wit, log, interactive} = require('node-wit');
 const WIT_TOKEN = process.env.WIT_TOKEN;
+const sessions = {};
 
 module.exports = function(robot) {
 
@@ -30,9 +31,31 @@ module.exports = function(robot) {
     return typeof val === 'object' ? val.value : val;
   };
 
+  const findOrCreateSession = (userid) => {
+    let sessionId;
+    // Let's see if we already have a session for the user userid
+    Object.keys(sessions).forEach(k => {
+      if (sessions[k].userid === userid) {
+        // Yep, got it!
+        sessionId = k;
+      }
+    });
+    if (!sessionId) {
+      // No session found for user userid, let's create a new one
+      // Also possible to create a sessionId depending on the Date, e.g.: sessionId = new Date().toISOString();
+      sessionId = "session-" + userid;
+      sessions[sessionId] = {userid: userid, context: {}};
+    }
+    return sessionId;
+  };
+
   robot.respond(/(.*)/i, function(res) {
     const query = res.match[1];
+    const sessionId = findOrCreateSession(res.message.user["id"]);
     let context = {};
+    if (sessions[sessionId].context !== {}) {
+      context = sessions[sessionId].context;
+    }
 
     const actions = {
       send(request, response) {
@@ -59,9 +82,11 @@ module.exports = function(robot) {
 
     const client = new Wit({accessToken: WIT_TOKEN, actions});
 
-    client.runActions("session-" + res.message.user["id"], query, context)
+    client.runActions(sessionId, query, context)
       .then((ctx) => {
         context = ctx;
+        // Save Context
+        sessions[sessionId].context = ctx;
       })
       .catch(err => console.error(err))
 
